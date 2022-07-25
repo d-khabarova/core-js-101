@@ -276,17 +276,14 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  /* const newarr = [];
+function propagateItemsByPositionIndex(arr) {
+  let newarr = [];
   arr.map((item, index) => {
-    const concArr = Array(index + 1).fill(item);
-    newarr.concat(concArr);
-    console.log(concArr);
+    const concArr = newarr.concat(Array(index + 1).fill(item));
+    newarr = concArr;
     return concArr;
   });
-  console.log(newarr);
-  return newarr; */
-  throw new Error('Not implemented');
+  return newarr;
 }
 
 
@@ -544,6 +541,14 @@ function distinct(arr) {
  *   }
  */
 function group(/* array, keySelector, valueSelector */) {
+  /* const map = new Map();
+  array.reduce((acc, item) => {
+    acc[keySelector(item)] = acc[keySelector(item)] || [];
+    acc[keySelector(item)].push(valueSelector(item));
+    return acc;
+  }, map);
+  console.log(map);
+  return map; */
   throw new Error('Not implemented');
 }
 
@@ -601,8 +606,24 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const len = arr.length;
+  const lenDiv = Math.floor(len / 2);
+  let head = [];
+  let tail = [];
+  let newarr = [];
+  if (len % 2 === 0) {
+    head = arr.slice(0, lenDiv);
+    tail = arr.slice(lenDiv, len);
+    newarr = tail.concat(head);
+  }
+  if (len % 2 !== 0) {
+    head = arr.slice(0, lenDiv);
+    tail = arr.slice(lenDiv + 1, len);
+    const center = arr[lenDiv];
+    newarr = tail.concat(center, head);
+  }
+  return newarr;
 }
 
 
